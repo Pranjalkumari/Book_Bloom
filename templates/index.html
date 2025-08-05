@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookBloom</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+    crossorigin="anonymous"
+  />
+  <style>
+    .text-white {
+      color: white;
+    }
+  </style>
+</head>
+
+<body style="background-color: black">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg" style="background-color: #00a65a">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">My Book Recommender</a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Recommend</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-5">
+        <h1 class="text-white" style="font-size: 50px">Top 50 Books</h1>
+      </div>
+
+      {% for i in range(book|length) %}
+      <div class="col-md-3 mt-4">
+        <div class="card">
+          <img class="card-img-top" src="{{ image[i] }}" alt="Book Cover" />
+          <div class="card-body bg-dark text-white">
+            <p>{{ book_name[i] }}</p>
+            <h5>{{ author[i] }}</h5>
+            <h6>Votes - {{ votes[i] }}</h6>
+            <h6>Rating - {{ rating[i] }}</h6>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
