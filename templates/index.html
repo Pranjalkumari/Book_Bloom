@@ -1,62 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BookBloom</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
-    crossorigin="anonymous"
-  />
-  <style>
-    .text-white {
-      color: white;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>BookBloom</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+ crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<style>
+    .text-white{
+        color:white
+    }
+</style>
+<body style="background-color:black">
 
-<body style="background-color: black">
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg" style="background-color: #00a65a">
-    <div class="container-fluid">
-      <a class="navbar-brand text-white" href="#">My Book Recommender</a>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Recommend</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    <nav class="navbar" style="background-color:#00a65a">
+        <a class="navbar-brand">My Book recommender</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a>Contact</a></li>
+        </ul>
+    </nav>
 
-  <!-- Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 mt-5">
-        <h1 class="text-white" style="font-size: 50px">Top 50 Books</h1>
-      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-white" style="font-size:50px">Top Books</h1>
+            </div>
 
-      {% for i in range(book|length) %}
-      <div class="col-md-3 mt-4">
-        <div class="card">
-          <img class="card-img-top" src="{{ image[i] }}" alt="Book Cover" />
-          <div class="card-body bg-dark text-white">
-            <p>{{ book_name[i] }}</p>
-            <h5>{{ author[i] }}</h5>
-            <h6>Votes - {{ votes[i] }}</h6>
-            <h6>Rating - {{ rating[i] }}</h6>
-          </div>
+            {% for i in range(book_name|length) %}
+                <div class="col-md-3" style="margin-top:50px">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{ image[i] }}">
+                            <p class="text-white">{{ book_name[i] }}</p>
+                            <p class="text-white">{{ author[i] }}</p>
+                            <p class="text-white">Votes - {{ votes[i] }}</p>
+                            
+                            <!-- Font Awesome CDN in <head> -->
+
+
+<p class="text-white">
+    Rating -
+    {% set avg = rating[i] / 2 %}
+    {% for star in range(1, 6) %}
+        {% if avg >= star %}
+            <i class="fas fa-star text-warning"></i>
+        {% elif avg >= star - 0.5 %}
+            <i class="fas fa-star-half-alt text-warning"></i>
+        {% else %}
+            <i class="far fa-star text-warning"></i>
+        {% endif %}
+    {% endfor %}
+    ({{ rating[i]|round(1) }}/10)
+</p>
+
+<p class="text-white"> <a href=" {{available[i] }}">available</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
         </div>
-      </div>
-      {% endfor %}
     </div>
-  </div>
+
 </body>
 </html>
