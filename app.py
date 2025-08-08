@@ -8,6 +8,7 @@ pt = pickle.load(open('PT.pkl', 'rb'))
 books = pickle.load(open('BK.pkl', 'rb'))
 similarity = pickle.load(open('SC.pkl', 'rb'))
 
+final_ratings= pickle.load(open('FR.pkl', 'rb'))
 app = Flask(__name__)
 
 @app.route('/')
